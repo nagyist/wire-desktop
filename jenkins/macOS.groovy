@@ -6,7 +6,7 @@ def parseJson(def text) {
 node('built-in') {
   def production = params.PRODUCTION
   def custom = params.CUSTOM
-  def NODE = tool name: 'node-v16.17.1', type: 'nodejs'
+  def NODE = tool name: 'node-v18.18.0', type: 'nodejs'
   def privateAPIResult = ''
 
   def jenkinsbot_secret = ''
@@ -79,7 +79,7 @@ node('built-in') {
       // Internal
       sh "ditto -c -k --sequesterRsrc --keepParent \"${WORKSPACE}/wrap/build/WireInternal-mas-universal/WireInternal.app/\" \"${WORKSPACE}/wrap/dist/WireInternal.zip\""
     }
-    archiveArtifacts "wrap/dist/**"
+    archiveArtifacts "package.json,wrap/dist/**"
     sh returnStatus: true, script: 'rm -rf wrap/'
   }
 
